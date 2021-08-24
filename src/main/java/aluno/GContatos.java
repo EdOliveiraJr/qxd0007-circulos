@@ -51,13 +51,12 @@ public class GContatos implements IContatosManager, ICirculosManager, ICirculoOp
 		List <CirculoBase> retorno = new ArrayList<>();
 
 		for (CirculoBase circuloBase : allCirculos) {
-			for (ContaBase contatoBase : circuloBase) {
-				if(contatoBase.getId().equals(id)){
-					retorno.add(circuloBase);
-				}
-			}	
+			if(circuloBase.getContatosNoCirculo().stream().anyMatch(contato -> contato.getId().equals(id))){
+				retorno.add(circuloBase);
+			}
+			
 		}
-		retorno.sort(Comparator.comparing(CirculoBase::getId);
+		retorno.sort(Comparator.comparing(CirculoBase::getId));
 		return retorno;
 	}
 
