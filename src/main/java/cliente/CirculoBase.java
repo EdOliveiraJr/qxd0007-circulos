@@ -1,22 +1,29 @@
 package cliente;
 
 public abstract class CirculoBase{
-	
-	public CirculoBase(String id, int limite){
+	private String id;
+	private int limite;
 
+	public CirculoBase(String id, int limite){
+		this.id = id;
+		this.limite = limite;
 	}
 
 	public void setLimite(int limite) {
-
+		this.limite = limite;
 	}
 
 	public String getId() {
-		return null;
+		return id;
 	}
 
 	public int getLimite() {
-		return 0;
+		return limite;
 	}
 
 	public abstract int getNumberOfContacts();
+
+	// public String toString() {
+	// 	return "circulo " + id +"/"+ limite;
+	// }
 }

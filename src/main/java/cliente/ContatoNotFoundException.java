@@ -7,11 +7,13 @@ public class ContatoNotFoundException extends Exception{
 	 */
 	private static final long serialVersionUID = 1600335032524758018L;
 
-	public ContatoNotFoundException(String contatoId) {
+	private final String id;
 
+	public ContatoNotFoundException(String contatoId) {
+		this.id = contatoId;
 	}
 
 	public String getContatoNaoEncontrado() {
-		return null;
+		return id;
 	}
 }

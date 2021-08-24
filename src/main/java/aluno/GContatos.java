@@ -2,10 +2,18 @@ package aluno;
 
 import cliente.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import aluno.base.Circulo;
+import aluno.base.Contato;
 
 public class GContatos implements IContatosManager, ICirculosManager, ICirculoOperationsManager {
 
+	List <CirculoBase> allCirculos = new ArrayList<>();
+	List <ContatoBase> allContatos = new ArrayList<>();
+ 
 	@Override
 	public boolean tie(String idContato, String idCirculo) throws CirculoNotFoundException, ContatoNotFoundException {
 		return false;
@@ -33,7 +41,13 @@ public class GContatos implements IContatosManager, ICirculosManager, ICirculoOp
 
 	@Override
 	public boolean createCircle(String id, int limite) {
-		return false;
+		for (CirculoBase circulo : allCirculos) {
+			if(circulo.getId().equals(id)){
+				return false;
+			}
+		}
+		allCirculos.add(new Circulo(id, limite));
+		return true;
 	}
 
 	@Override
@@ -43,32 +57,49 @@ public class GContatos implements IContatosManager, ICirculosManager, ICirculoOp
 
 	@Override
 	public CirculoBase getCircle(String idCirculo) {
+		for (CirculoBase circuloBase : allCirculos) {
+			if(circuloBase.getId().equals(idCirculo)){
+				return circuloBase;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public List<CirculoBase> getAllCircles() {
-		return null;
+		return allCirculos;
 	}
 
 	@Override
 	public boolean removeCircle(String idCirculo) {
+		for (CirculoBase circulo : allCirculos) {
+			if(circulo.getId().equals(idCirculo)){
+				allCirculos.remove(circulo);
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public int getNumberOfCircles() {
-		return 0;
+		return allCirculos.size();
 	}
 
 	@Override
 	public boolean createContact(String id, String email) {
-		return false;
+		for (ContatoBase contato : allContatos) {
+			if(contato.getId().equals(id)){
+				return false;
+			}
+		}
+		allContatos.add(new Contato(id, email));
+		return true;
 	}
 
 	@Override
 	public List<ContatoBase> getAllContacts() {
-		return null;
+		return allContatos;
 	}
 
 	@Override
@@ -78,17 +109,28 @@ public class GContatos implements IContatosManager, ICirculosManager, ICirculoOp
 
 	@Override
 	public boolean removeContact(String id) {
+		for (ContatoBase contatoBase : allContatos) {
+			if(contatoBase.getId().equals(id)){
+				allContatos.remove(contatoBase);
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public ContatoBase getContact(String id) {
+		for (ContatoBase contatoBase : allContatos) {
+			if(contatoBase.getId().equals(id)){
+				return contatoBase;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public int getNumberOfContacts() {
-		return 0;
+		return allContatos.size();
 	}
 
 	@Override
