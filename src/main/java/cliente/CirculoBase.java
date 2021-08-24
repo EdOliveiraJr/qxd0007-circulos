@@ -1,5 +1,7 @@
 package cliente;
 
+import java.util.List;
+
 public abstract class CirculoBase{
 	private String id;
 	private int limite;
@@ -22,6 +24,12 @@ public abstract class CirculoBase{
 	}
 
 	public abstract int getNumberOfContacts();
+
+	public abstract List <ContatoBase> getContatosNoCirculo();
+
+	public abstract boolean adicionaNaLista (ContatoBase contato);
+	
+	public abstract boolean removerDaLista(ContatoBase contato);
 
 	// public String toString() {
 	// 	return "circulo " + id +"/"+ limite;

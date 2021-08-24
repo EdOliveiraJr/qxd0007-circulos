@@ -26,7 +26,20 @@ public class GContatos implements IContatosManager, ICirculosManager, ICirculoOp
 
 	@Override
 	public List<ContatoBase> getContacts(String id) throws CirculoNotFoundException {
-		return null;
+		if(allContatos.stream().noneMatch(contato -> contato.getId().equals(id))){
+			throw new CirculoNotFoundException(id);
+		}
+		
+		List <ContatoBase> retorno = new ArrayList<>();
+
+		for (CirculoBase circuloBase : allCirculos) {
+			if(circuloBase.getId().equals(id)){
+				retorno = circuloBase.getContatosNoCirculo();
+				
+			}
+		}
+		retorno.sort(Comparator.comparing(ContatoBase::getId));
+		return retorno;
 	}
 
 	@Override

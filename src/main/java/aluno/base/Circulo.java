@@ -3,17 +3,19 @@ package aluno.base;
 import java.util.ArrayList;
 import java.util.List;
 import cliente.CirculoBase;
+import cliente.ContatoBase;
 
 public class Circulo extends CirculoBase {
 
-    List <Contato> contatosNoCirculo;
+    List <ContatoBase> contatosNoCirculo;
 
     public Circulo(String id, int limite) {
         super(id, limite);
         contatosNoCirculo = new ArrayList<>();
     }
 
-    public boolean adicionaNaLista (Contato contato){
+    @Override
+    public boolean adicionaNaLista (ContatoBase contato){
         if(contatosNoCirculo.contains(contato)){
             return false;
         }
@@ -21,12 +23,18 @@ public class Circulo extends CirculoBase {
         return true;
     }
 
-    public boolean removerDaLista(Contato contato){
+    @Override
+    public boolean removerDaLista(ContatoBase contato){
         if(!contatosNoCirculo.contains(contato)){
             return false;
         }
         contatosNoCirculo.remove(contato);
         return true;
+    }
+
+    @Override    
+    public List <ContatoBase> getContatosNoCirculo(){
+        return contatosNoCirculo;
     }
 
     @Override
